@@ -32,4 +32,5 @@ class TaskAdapter(private val tasks: MutableList<Task>) : RecyclerView.Adapter<T
     override fun getItemCount(): Int {
         return tasks.size
     }
+
 }

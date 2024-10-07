@@ -73,11 +73,18 @@ class MainActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(taskName)) {
                 Toast.makeText(this, "Task cannot be empty", Toast.LENGTH_SHORT).show()
             } else {
-                val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-                val task = Task(taskName, currentDate)
-                tasks.add(task)
-                taskAdapter.notifyItemInserted(tasks.size - 1)
-                taskInput.text.clear() // Clear the input field after adding the task
+                AlertDialog.Builder(this)
+                    .setTitle("Confirm Add Task")
+                    .setMessage("Are you sure you want to add this task?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                        val task = Task(taskName, currentDate)
+                        tasks.add(task)
+                        taskAdapter.notifyItemInserted(tasks.size - 1)
+                        taskInput.text.clear()
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
             }
         }
     }
