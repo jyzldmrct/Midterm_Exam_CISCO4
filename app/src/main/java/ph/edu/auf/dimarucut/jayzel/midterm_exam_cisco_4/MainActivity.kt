@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSwipeToDelete() {
-        val swipeHandler = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        val swipeHandler = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -77,8 +78,10 @@ class MainActivity : AppCompatActivity() {
                     .setTitle("Confirm Add Task")
                     .setMessage("Are you sure you want to add this task?")
                     .setPositiveButton("Yes") { _, _ ->
-                        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-                        val task = Task(taskName, currentDate)
+                        val currentDate =
+                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                        val taskNumber = tasks.size + 1
+                        val task = Task(taskNumber, taskName, currentDate)
                         tasks.add(task)
                         taskAdapter.notifyItemInserted(tasks.size - 1)
                         taskInput.text.clear()
@@ -89,26 +92,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showAddTaskDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_add_task, null)
-        val editText = dialogView.findViewById<EditText>(R.id.taskNameEditText)
-
-        val alertDialog = AlertDialog.Builder(this)
-            .setTitle("Add Task")
-            .setView(dialogView)
-            .setPositiveButton("Add") { _, _ ->
-                val taskName = editText.text.toString()
-                if (TextUtils.isEmpty(taskName)) {
-                    Toast.makeText(this, "Task cannot be empty", Toast.LENGTH_SHORT).show()
-                } else {
-                    val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-                    val task = Task(taskName, currentDate)
-                    tasks.add(task)
-                    taskAdapter.notifyItemInserted(tasks.size - 1)
-                }
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-        alertDialog.show()
-    }
 }
