@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     .setMessage("Are you sure you want to add this task?")
                     .setPositiveButton("Yes") { _, _ ->
                         val currentDate =
-                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                            SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(Date())
                         val taskNumber = tasks.size + 1
                         val task = Task(taskNumber, taskName, currentDate)
                         tasks.add(task)
@@ -91,5 +91,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

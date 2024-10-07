@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ph.edu.auf.dimarucut.jayzel.midterm_exam_cisco_4.R
 
-data class Task(val taskNumber: Int, val name: String, val date: String)
+data class Task(val taskNumber: Int, val name: String, val dateTime: String)
 
 class TaskAdapter(private val tasks: MutableList<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -26,7 +26,7 @@ class TaskAdapter(private val tasks: MutableList<Task>) : RecyclerView.Adapter<T
         val task = tasks[position]
         holder.taskNumber.text = task.taskNumber.toString()
         holder.taskName.text = task.name
-        holder.taskDate.text = task.date
+        holder.taskDate.text = task.dateTime
     }
 
     override fun getItemCount(): Int {
